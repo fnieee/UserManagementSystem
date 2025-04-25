@@ -16,24 +16,30 @@ A simple yet powerful user management system built with Laravel. Designed specif
 
 ## 🚀 Setup Instructions
 - Install Dependencies
+```bash
 composer install
 
 - Create and configure .env file
+```bash
 cp .env.example .env
 
 - Update Database
+```bash
 DB_CONNECTION=mysql
 DB_DATABASE=your_db_name
 DB_USERNAME=your_db_user
 DB_PASSWORD=your_db_password
 
 - Generate app key
+```bash
 php artisan key:generate
 
 - Run migrations
+```bash
 php artisan migrate
 
 - Seed an Admin user (optional)
+```bash
 php artisan tinker
 
 \App\Models\User::create([
@@ -46,7 +52,9 @@ php artisan tinker
 ]);
 
 - Start Application
+```bash
 php artisan serve
+```
 
 - Visit http://localhost:8000 and log in as the admin.
 
