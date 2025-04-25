@@ -20,26 +20,21 @@ A simple yet powerful user management system built with Laravel. Designed specif
 composer install
 
 - Create and configure .env file
-```bash
 cp .env.example .env
 
 - Update Database
-```bash
 DB_CONNECTION=mysql
 DB_DATABASE=your_db_name
 DB_USERNAME=your_db_user
 DB_PASSWORD=your_db_password
 
 - Generate app key
-```bash
 php artisan key:generate
 
 - Run migrations
-```bash
 php artisan migrate
 
 - Seed an Admin user (optional)
-```bash
 php artisan tinker
 
 \App\Models\User::create([
@@ -52,7 +47,6 @@ php artisan tinker
 ]);
 
 - Start Application
-```bash
 php artisan serve
 ```
 
@@ -85,7 +79,6 @@ php artisan serve
 
 ## Assumptions and Design Choices
 - Phone number & email must be unique
-- Soft deletes ensure users are not permanently removed.
 - Admin-only frontend access.
 - Login or Register before accessing the system.
 
