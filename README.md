@@ -1,61 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧑‍💼 User Management System (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple yet powerful user management system built with Laravel. Designed specifically for **admin-only access**, this system allows an administrator to perform full CRUD (Create, Read, Update, Delete) operations through a clean web interface.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ⚙️ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 🔐 Admin-only access to user management
+- 🧾 Create, view, update, and delete users
+- ✅ Validation: Unique email, phone number, password
+- 📦 Clean and structured Laravel MVC architecture
+- 🎨 Bootstrap-based frontend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Setup Instructions
+- Install Dependencies
+composer install
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Create and configure .env file
+cp .env.example .env
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Update Database
+DB_CONNECTION=mysql
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user
+DB_PASSWORD=your_db_password
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Generate app key
+php artisan key:generate
 
-## Laravel Sponsors
+- Run migrations
+php artisan migrate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Seed an Admin user (optional)
+php artisan tinker
 
-### Premium Partners
+\App\Models\User::create([
+    'name' => 'Admin',
+    'email' => 'admin@example.com',
+    'phone_number' => '0123456789',
+    'password' => Hash::make('admin123'),
+    'status' => 'active',
+    'role' => 'admin',
+]);
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+- Start Application
+php artisan serve
 
-## Contributing
+- Visit http://localhost:8000 and log in as the admin.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Web Endpoints
+- GET /login – Show login form
+- POST /login – Log in user
+- POST /logout – Log out authenticated user
+- GET /register – Show registration form (optional)
+- POST /register – Register a new user (optional)
+- GET /dashboard – Show admin dashboard
+- GET /users – List users (with status filter and pagination)
+- GET /users/create – Show form to create a new user
+- POST /users – Create and store a new user
+- GET /users/{id}/edit – Show form to edit a user
+- PUT /users/{id} – Update existing user
+- DELETE /users/{id} – Soft delete a user
+- POST /users/bulk-delete – Soft delete multiple users at once
+- GET /users/export – Export all users to Excel (Under Maintainence)
 
-## Code of Conduct
+## API Endpoints (Under Maintainence)
+- POST `/api/users` - Create User
+- GET `/api/users` - List Users (with `status` filter and pagination)
+- GET `/api/users/{id}` - User Details
+- DELETE `/api/users/{id}` - Soft Delete User
+- POST `/api/users/bulk-delete` - Bulk Delete
+- GET `/api/users/export` - Export to Excel
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+## Assumptions and Design Choices
+- Phone number & email must be unique
+- Soft deletes ensure users are not permanently removed.
+- Admin-only frontend access.
+- Login or Register before accessing the system.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Unit Testing
+```bash
+php artisan test
